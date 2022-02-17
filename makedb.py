@@ -56,9 +56,3 @@ def make_json(csvFilePath, jsonFilePath):
     # # function to dump data
     # with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
     #     jsonf.write(json.dumps(data, indent=4))
-
-csvFilePath = 'lyrics-data.csv'
-jsonFilePath = 'database.json'
-
-# Call the make_json function
-make_json(csvFilePath, jsonFilePath)

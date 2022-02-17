@@ -1,6 +1,6 @@
 import json
 import pickle
-# import makedb as makedb
+import makedb as makedb
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -25,6 +25,9 @@ def preProcess(s):
     s = s.translate(str.maketrans(string.whitespace, ' ' * len(string.whitespace), ''))
     return s
 data = []
+
+if not Path('database.json').exists():
+    makedb.make_json('lyrics-data.csv', 'database.json')
 
 #First time search, dump on pickle, else load pickle
 if not Path('cleaned.pickle').exists():
