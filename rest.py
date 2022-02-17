@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify
-from flask_restful import reqparse, abort, Api, Resource
+from flask_cors import cross_origin
 import main as module
 
 app = Flask(__name__)
-
-parser = reqparse.RequestParser()
-parser.add_argument('query', type=str)
-parser.add_argument('score', type=str)
+# cors = CORS(app, resources={r'/api/*', {'origins': "http://localhost:3000"}})
+print("hello")
 
 @app.route('/search', methods=['POST','GET'])
+@cross_origin(origins=['http://localhost:3000'])
 def search():
     if request.method == 'POST':
         body = request.get_json()
@@ -21,27 +20,11 @@ def search():
         else:
             return {"message": "No scoring system"},200
 
-# class CalculateScore(Resource):
-#     def post(self):
-#         args = parser.parse_args()
-#         query = str(args['query'])
-#         score = str(args['score'])
-#         if score =='tf':
-#             return jsonify(module.tf_score(query))
-#         if score == 'tf-idf':
-#             return jsonify(module.tfidf_score(query))
-#         if score == 'bm25':
-#             return jsonify(module.bm25_score(query))
-#         else:
-#             return None
-
 @app.route('/hello')
 def hello():
     q = request.args.get('q')
     print(q)
     return { "message": "Hello!"}, 201
-
-# api.add_resource(CalculateScore, '/search')
 
 if __name__ == '__main__':
     app.run()
