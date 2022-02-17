@@ -71,7 +71,7 @@ def exactly_match_artist(input):
     for i,index in enumerate(data['Artist']):
         if index == input:
             match.append(data['Song Name'][i])
-    return match
+    return sorted(match)
 
 def exactly_match_song_name(input):
     match = []
